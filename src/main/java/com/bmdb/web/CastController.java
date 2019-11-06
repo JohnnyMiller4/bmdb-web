@@ -24,7 +24,7 @@ public class CastController {
 	
 	//list - return all casts
 	@GetMapping("/") //exposes the following method to the web.
-	public JsonResponse listStuffies() {
+	public JsonResponse listCast() {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(castRepo.findAll());
@@ -37,7 +37,7 @@ public class CastController {
 	
 	//get - return 1 cast for the given id
 	@GetMapping("/{id}") //exposes the following method to the web.
-	public JsonResponse getStuffy(@PathVariable int id) {
+	public JsonResponse getCast(@PathVariable int id) {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(castRepo.findById(id));
@@ -51,7 +51,7 @@ public class CastController {
 	
 	//add - adds a new cast
 	@PostMapping("/")
-	public JsonResponse addStuffy(@RequestBody Cast c) {
+	public JsonResponse addCast(@RequestBody Cast c) {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(castRepo.save(c));
@@ -64,14 +64,14 @@ public class CastController {
 		
 	//update - updates a cast
 	@PutMapping("/")
-	public JsonResponse updateStuffy(@RequestBody Cast c) {
+	public JsonResponse updateCast(@RequestBody Cast c) {
 	JsonResponse jr = null;
 		try {
 			if (castRepo.existsById(c.getId())) {
 				jr = JsonResponse.getInstance(castRepo.save(c));
 			} else {
 				//record doesn't exist
-				jr = JsonResponse.getInstance("Error updating Stuffy. ID: " + c.getId() + " does not exist.");
+				jr = JsonResponse.getInstance("Error updating Cast. ID: " + c.getId() + " does not exist.");
 				}
 			}
 		catch (Exception e) {
@@ -82,7 +82,7 @@ public class CastController {
 		
 		//delete - delete a cast
 		@DeleteMapping("/{id}")
-		public JsonResponse deleteStuffy(@PathVariable int id) {
+		public JsonResponse deleteCast(@PathVariable int id) {
 		JsonResponse jr = null;	
 			try {
 				if (castRepo.existsById(id)) {
@@ -90,7 +90,7 @@ public class CastController {
 					jr = JsonResponse.getInstance("Delete sucessful!");
 				} else {
 				//record doesn't exist
-				jr = JsonResponse.getInstance("Error deleting Stuffy. ID: " + id + " does not exist.");
+				jr = JsonResponse.getInstance("Error deleting Cast. ID: " + id + " does not exist.");
 				}
 			}
 			catch (Exception e) {

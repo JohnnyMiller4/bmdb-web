@@ -24,7 +24,7 @@ public class MovieController {
 	
 	//list - return all movies
 	@GetMapping("/") //exposes the following method to the web.
-	public JsonResponse listStuffies() {
+	public JsonResponse listMovies() {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(movieRepo.findAll());
@@ -37,7 +37,7 @@ public class MovieController {
 	
 	//get - return 1 movie for the given id
 	@GetMapping("/{id}") //exposes the following method to the web.
-	public JsonResponse getStuffy(@PathVariable int id) {
+	public JsonResponse getMovie(@PathVariable int id) {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(movieRepo.findById(id));
@@ -51,7 +51,7 @@ public class MovieController {
 	
 	//add - adds a new movie
 	@PostMapping("/")
-	public JsonResponse addStuffy(@RequestBody Movie m) {
+	public JsonResponse addMovie(@RequestBody Movie m) {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(movieRepo.save(m));
@@ -64,14 +64,14 @@ public class MovieController {
 		
 	//update - updates a movie
 	@PutMapping("/")
-	public JsonResponse updateStuffy(@RequestBody Movie m) {
+	public JsonResponse updateMovie(@RequestBody Movie m) {
 	JsonResponse jr = null;
 		try {
 			if (movieRepo.existsById(m.getId())) {
 				jr = JsonResponse.getInstance(movieRepo.save(m));
 			} else {
 				//record doesn't exist
-				jr = JsonResponse.getInstance("Error updating Stuffy. ID: " + m.getId() + " does not exist.");
+				jr = JsonResponse.getInstance("Error updating Movie. ID: " + m.getId() + " does not exist.");
 				}
 			}
 		catch (Exception e) {
@@ -82,7 +82,7 @@ public class MovieController {
 		
 		//delete - delete a movie
 		@DeleteMapping("/{id}")
-		public JsonResponse deleteStuffy(@PathVariable int id) {
+		public JsonResponse deleteMovie(@PathVariable int id) {
 		JsonResponse jr = null;	
 			try {
 				if (movieRepo.existsById(id)) {
@@ -90,7 +90,7 @@ public class MovieController {
 					jr = JsonResponse.getInstance("Delete sucessful!");
 				} else {
 				//record doesn't exist
-				jr = JsonResponse.getInstance("Error deleting Stuffy. ID: " + id + " does not exist.");
+				jr = JsonResponse.getInstance("Error deleting Movie. ID: " + id + " does not exist.");
 				}
 			}
 			catch (Exception e) {

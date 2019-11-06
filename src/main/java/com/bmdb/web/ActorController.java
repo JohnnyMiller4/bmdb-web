@@ -24,7 +24,7 @@ public class ActorController {
 	
 	//list - return all actors
 	@GetMapping("/") //exposes the following method to the web.
-	public JsonResponse listStuffies() {
+	public JsonResponse listActors() {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(actorRepo.findAll());
@@ -37,7 +37,7 @@ public class ActorController {
 	
 	//get - return 1 actor for the given id
 	@GetMapping("/{id}") //exposes the following method to the web.
-	public JsonResponse getStuffy(@PathVariable int id) {
+	public JsonResponse getActor(@PathVariable int id) {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(actorRepo.findById(id));
@@ -51,7 +51,7 @@ public class ActorController {
 	
 	//add - adds a new actor
 	@PostMapping("/")
-	public JsonResponse addStuffy(@RequestBody Actor a) {
+	public JsonResponse addActor(@RequestBody Actor a) {
 	JsonResponse jr = null;
 		try {
 			jr = JsonResponse.getInstance(actorRepo.save(a));
@@ -64,14 +64,14 @@ public class ActorController {
 		
 	//update - updates a actor
 	@PutMapping("/")
-	public JsonResponse updateStuffy(@RequestBody Actor a) {
+	public JsonResponse updateActor(@RequestBody Actor a) {
 	JsonResponse jr = null;
 		try {
 			if (actorRepo.existsById(a.getId())) {
 				jr = JsonResponse.getInstance(actorRepo.save(a));
 			} else {
 				//record doesn't exist
-				jr = JsonResponse.getInstance("Error updating Stuffy. ID: " + a.getId() + " does not exist.");
+				jr = JsonResponse.getInstance("Error updating Actor. ID: " + a.getId() + " does not exist.");
 				}
 			}
 		catch (Exception e) {
@@ -82,7 +82,7 @@ public class ActorController {
 		
 		//delete - delete a actor
 		@DeleteMapping("/{id}")
-		public JsonResponse deleteStuffy(@PathVariable int id) {
+		public JsonResponse deleteActor(@PathVariable int id) {
 		JsonResponse jr = null;	
 			try {
 				if (actorRepo.existsById(id)) {
@@ -90,7 +90,7 @@ public class ActorController {
 					jr = JsonResponse.getInstance("Delete sucessful!");
 				} else {
 				//record doesn't exist
-				jr = JsonResponse.getInstance("Error deleting Stuffy. ID: " + id + " does not exist.");
+				jr = JsonResponse.getInstance("Error deleting Actor. ID: " + id + " does not exist.");
 				}
 			}
 			catch (Exception e) {
