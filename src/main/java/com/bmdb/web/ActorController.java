@@ -1,6 +1,7 @@
 package com.bmdb.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,8 +57,9 @@ public class ActorController {
 		try {
 			jr = JsonResponse.getInstance(actorRepo.save(a));
 		}
-		catch (Exception e) {
-			jr = JsonResponse.getInstance(e);
+		//Only use the following for add controllers/methods
+		catch (DataIntegrityViolationException dive) {
+			jr = JsonResponse.getInstance(dive.getRootCause().getMessage());
 		}
 	return jr;
 	}
